@@ -1,2 +1,2 @@
-# DFM-UNet
-the code of DFM-UNet is coming soon
+# Dual-Mamba
+the code of Dual-Mamba is coming soon
