@@ -46,7 +46,6 @@ class PixelLevelModeling(nn.Module):
         )
 
         # adjust the window size here to fit the feature map
-        self.p = p[0]
         self.p1 = p[0]
         self.p2 = p[1]
         self.p3 = p[2]
@@ -69,7 +68,7 @@ class PixelLevelModeling(nn.Module):
 
         # partition
         if Z%self.p1==0 and H%self.p2==0 and W%self.p3==0:
-            print("yes! devided")
+            # print("yes! devided")
             x_div = x.reshape(B, C, Z//self.p1, self.p1, H//self.p2, self.p2, W//self.p3, self.p3)  
             # (B, self.p1, self.p2, self.p3, C, Z//self.p1, H//self.p2, W//self.p3) -> (B*self.p1*self.p2*self.p3, C, Z//self.p1, H//self.p2, W//self.p3)
             x_div = x_div.permute(0, 3, 5, 7, 1, 2, 4, 6).contiguous().view(B*self.p1*self.p2*self.p3, C, Z//self.p1, H//self.p2, W//self.p3)
@@ -81,7 +80,7 @@ class PixelLevelModeling(nn.Module):
 
         n_tokens = x_div.shape[2:].numel()
    
-        print("x_div.shape: ", x_div.shape)
+        # print("x_div.shape: ", x_div.shape)
         x_flat = x_div.reshape(NB, C, n_tokens).transpose(-1, -2) #NB，n_tokens，C
         x_norm = self.norm(x_flat)
 
@@ -141,7 +140,7 @@ class PatchLevelModeling(nn.Module):
 
         n_tokens = x_div.shape[2:].numel()
    
-        print("x_div.shape in window mamba layer: ", x_div.shape)
+        # print("x_div.shape in window mamba layer: ", x_div.shape)
         x_flat = x_div.reshape(B, C, n_tokens).transpose(-1, -2)
         x_norm = self.norm(x_flat)
 
