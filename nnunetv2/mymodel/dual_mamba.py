@@ -27,6 +27,7 @@ from nnunetv2.utilities.network_initialization import InitWeights_He
 from mamba_ssm import Mamba
 import copy
 
+
 drop_rate = 0.1
 
 class PixelLevelModeling(nn.Module):
@@ -344,6 +345,8 @@ class ResidualEncoder(nn.Module):
         )
 
         input_channels = stem_channels
+
+        # define kernel size here
         stride = [(64,64,64),(32,32,32),(16,16,16),(8,8,8),(6,6,6),(6,6,6)]
         num_patch = [[2,2,2],[2,2,2],[2,2,2],[2,2,2],[2,2,2],[1,1,1]]
 
