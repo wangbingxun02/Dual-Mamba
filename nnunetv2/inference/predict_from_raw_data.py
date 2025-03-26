@@ -101,40 +101,32 @@ class nnUNetPredictor(object):
                                                     trainer_name, 'nnunetv2.training.nnUNetTrainer')
         print(trainer_name)
         if trainer_name == 'nnUNetTrainer':
-            print("111111111111")
             network = trainer_class.build_network_architecture(plans_manager, dataset_json, configuration_manager,
                                                            num_input_channels, enable_deep_supervision=False)
 
        
         elif trainer_name == 'nnUNetTrainer_CoTr' or trainer_name == 'nnUNetTrainer_transbts':
-            print("444444444444")
             model = trainer_name.split("nnUNetTrainer_")[1]
-
             if((configuration_manager.patch_size[0] % 8)!=0 ):
                 configuration_manager.patch_size[0]=configuration_manager.patch_size[0] +(8 - configuration_manager.patch_size[0] % 8)
             network = trainer_class.build_my_network_architecture(plans_manager, dataset_json, configuration_manager,
                                                            num_input_channels, model)
         
         elif trainer_name == 'nnUNetTrainer_unetr':
-            print("5555555555555")
             model = trainer_name.split("nnUNetTrainer_")[1]
-
             if((configuration_manager.patch_size[0] % 16)!=0 ):
                 configuration_manager.patch_size[0]=configuration_manager.patch_size[0] + (16 - configuration_manager.patch_size[0] % 16)
             network = trainer_class.build_my_network_architecture(plans_manager, dataset_json, configuration_manager,
                                                            num_input_channels, model)
             
         elif trainer_name == 'nnUNetTrainer_segmamba':
-            print("666666666666")
             model = trainer_name.split("nnUNetTrainer_")[1]
-
             if((configuration_manager.patch_size[0] % 32)!=0 ):
                 configuration_manager.patch_size[0]=configuration_manager.patch_size[0] + (32 - configuration_manager.patch_size[0] % 32)
             network = trainer_class.build_my_network_architecture(plans_manager, dataset_json, configuration_manager,
                                                            num_input_channels, model)
 
         else:
-            print("2222222222222")
             model = trainer_name.split("nnUNetTrainer_")[1]
             network = trainer_class.build_my_network_architecture(plans_manager, dataset_json, configuration_manager,
                                                            num_input_channels, model)

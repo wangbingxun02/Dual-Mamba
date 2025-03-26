@@ -1,4 +1,3 @@
-import segmentation_models_pytorch as smp
 import torch
 from nnunetv2.utilities.plans_handling.plans_handler import ConfigurationManager, PlansManager
 from torch import nn
@@ -45,7 +44,6 @@ def get_my_network_from_plans(plans_manager: PlansManager,
     
     elif(model == 'CoTr'):
         # only support 3D image
-        # verse 和 totalseg 数据集上用lr=0.01
         model = ResTranUnet(norm_cfg= 'IN' , activation_cfg= 'LeakyReLU' ,img_size=configuration_manager.patch_size, in_channels=num_input_channels ,num_classes=label_manager.num_segmentation_heads)
 
 
